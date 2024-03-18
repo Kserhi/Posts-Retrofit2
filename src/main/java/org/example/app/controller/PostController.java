@@ -2,40 +2,40 @@ package org.example.app.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.example.app.entity.User;
-import org.example.app.model.UserModel;
+import org.example.app.entity.Posts;
+import org.example.app.model.PostModel;
 import org.example.app.utils.AppStarter;
 import org.example.app.utils.Constants;
-import org.example.app.view.UsersView;
+import org.example.app.view.PostView;
 import retrofit2.Response;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class UsersController {
+public class PostController {
 
-    UserModel model;
-    UsersView view;
+    PostModel model;
+    PostView view;
 
-    public UsersController(UserModel model, UsersView view) {
+    public PostController(PostModel model, PostView view) {
         this.model = model;
         this.view = view;
     }
 
-    public void getUsers() {
-        view.getOutput(readUsers());
+    public void getPosts() {
+        view.getOutput(readPosts());
         AppStarter.startApp();
     }
 
-    private String readUsers() {
-        Optional<Response<List<User>>> optional = model.fetchUsers();
+    private String readPosts() {
+        Optional<Response<List<Posts>>> optional = model.fetchPosts();
         if (optional.isEmpty()) {
             return Constants.NO_DATA_MSG;
         } else {
             Gson gson = new Gson();
-            List<User> users = gson.fromJson(gson.toJson(optional.get().body()),
-                    new TypeToken<List<User>>() {}.getType());
+            List<Posts> posts = gson.fromJson(gson.toJson(optional.get().body()),
+                    new TypeToken<List<Posts>>() {}.getType());
 
             StringBuilder stringBuilder = new StringBuilder();
             AtomicInteger cnt = new AtomicInteger(0);
@@ -43,9 +43,9 @@ public class UsersController {
 
 
 
-            for (User user : users) {
-                str = cnt.incrementAndGet() + ") User: id " + user.getId() + ", "
-                        +user.getTitle() + "\n";
+            for (Posts post : posts) {
+                str = cnt.incrementAndGet() + ") Post: id " + post.getId() + ", "
+                        + post.getTitle() + "\n";
                 stringBuilder.append(str);
             }
             return stringBuilder.toString();

@@ -15,8 +15,8 @@ public class AppView {
         System.out.println(""" 
                                                    
                 _____ MENU ________________
-                1 - Get all users.
-                2 - Get user by id.
+                1 - Get all posts.
+                2 - Get posts by id.
                 0 - Close the application.
                 """);
     }

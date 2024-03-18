@@ -2,7 +2,7 @@ package org.example.app.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+public class Posts {
 
     @SerializedName("userId")
     private final int userId;
@@ -13,7 +13,7 @@ public class User {
     @SerializedName("body")
     private final String body;
 
-    public User(int userId, int id, String title, String body) {
+    public Posts(int userId, int id, String title, String body) {
         this.userId = userId;
         this.id = id;
         this.title = title;
